@@ -64,7 +64,6 @@ body {
 .app-wrapper {
 
     width: 100%;
-
     max-width: 480px;
 
     background: #0d0d11;
@@ -72,13 +71,17 @@ body {
     min-height: 100vh;
 
     display: flex;
-
     flex-direction: column;
 
     position: relative;
 
     padding-bottom: 90px;
 }
+
+
+/* =========================
+   HEADER
+========================= */
 
 .header-top {
 
@@ -112,11 +115,14 @@ body {
 
 .logo span {
 
+    line-height: 1;
+}
+
+.logo-dot {
+
     color: #00e5ff;
 
     font-size: 18px;
-
-    line-height: 1;
 }
 
 .auth-buttons {
@@ -163,6 +169,11 @@ body {
 
     text-transform: uppercase;
 }
+
+
+/* =========================
+   NAVIGATION
+========================= */
 
 .nav-categories {
 
@@ -212,6 +223,11 @@ body {
     color: #ffd700;
 }
 
+
+/* =========================
+   MAIN PLAYER 9:16
+========================= */
+
 .hero-container {
 
     position: relative;
@@ -245,8 +261,14 @@ body {
 }
 
 .xh-frame.loaded {
+
     opacity: 1;
 }
+
+
+/* =========================
+   LOADER
+========================= */
 
 .xh-loader {
 
@@ -286,6 +308,11 @@ body {
             rotate(360deg);
     }
 }
+
+
+/* =========================
+   PLAY BUTTON
+========================= */
 
 .player-play {
 
@@ -345,6 +372,24 @@ body {
     margin-left: 4px;
 }
 
+.player-play::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -8px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.35);
+
+    animation:
+        playRing 2s ease-in-out infinite;
+}
+
 @keyframes playPulse {
 
     0% {
@@ -375,24 +420,6 @@ body {
     }
 }
 
-.player-play::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: -8px;
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.35);
-
-    animation:
-        playRing 2s ease-in-out infinite;
-}
-
 @keyframes playRing {
 
     0% {
@@ -416,6 +443,11 @@ body {
         opacity: 0.35;
     }
 }
+
+
+/* =========================
+   CONTENT GRID
+========================= */
 
 .content-grid {
 
@@ -500,6 +532,11 @@ body {
 
     overflow: hidden;
 }
+
+
+/* =========================
+   CTA
+========================= */
 
 .bottom-cta-wrapper {
 
@@ -586,13 +623,21 @@ body {
 <div class="app-wrapper xh-fake-player"
      style="cursor: pointer;">
 
+
+    <!-- HEADER -->
+
     <header class="header-top">
 
         <div class="logo">
+
             <span class="logo-main"></span>
+
             <span class="logo-dot"></span>
+
             <span class="logo-name"></span>
+
         </div>
+
 
         <div class="auth-buttons">
 
@@ -605,38 +650,50 @@ body {
     </header>
 
 
+    <!-- NAV -->
+
     <nav class="nav-categories">
 
         <div class="nav-item active"
-             data-lang-key="all"></div>
+             data-lang-key="all">
+        </div>
 
         <div class="nav-item"
-             data-lang-key="trans"></div>
+             data-lang-key="trans">
+        </div>
 
         <div class="nav-item"
-             data-lang-key="lesbian"></div>
+             data-lang-key="lesbian">
+        </div>
 
         <div class="nav-item"
-             data-lang-key="milf"></div>
+             data-lang-key="milf">
+        </div>
 
         <div class="nav-item"
-             data-lang-key="animation"></div>
+             data-lang-key="animation">
+        </div>
 
         <div class="nav-item"
-             data-lang-key="vr"></div>
+             data-lang-key="vr">
+        </div>
 
         <div class="nav-item premium"
-             data-lang-key="premium"></div>
+             data-lang-key="premium">
+        </div>
 
     </nav>
 
+
+    <!-- MAIN PLAYER -->
 
     <div class="hero-container">
 
         <img
             class="xh-frame"
             id="frame"
-            decoding="async">
+            decoding="async"
+            alt="">
 
         <div
             class="xh-loader"
@@ -651,6 +708,8 @@ body {
     </div>
 
 
+    <!-- VERTICAL 1 -->
+
     <div class="content-grid">
 
 
@@ -658,41 +717,54 @@ body {
 
             <img
                 id="vertical-1"
-                decoding="async">
+                decoding="async"
+                alt="">
 
             <div class="grid-overlay">
 
-                <div class="grid-title dynamic-text"></div>
+                <div
+                    class="grid-title dynamic-text">
+                </div>
 
             </div>
 
         </div>
 
+
+        <!-- VERTICAL 2 -->
 
         <div class="grid-item">
 
             <img
                 id="vertical-2"
-                decoding="async">
+                decoding="async"
+                alt="">
 
             <div class="grid-overlay">
 
-                <div class="grid-title dynamic-text"></div>
+                <div
+                    class="grid-title dynamic-text">
+                </div>
 
             </div>
 
         </div>
 
 
+        <!-- RANDOM 1 / 2 / 3 -->
+
         <div class="grid-item full-width">
 
             <img
                 id="horizontal-random"
-                decoding="async">
+                decoding="async"
+                alt="">
 
             <div class="grid-overlay">
 
-                <div class="grid-title dynamic-text"></div>
+                <div
+                    class="grid-title dynamic-text">
+                </div>
 
             </div>
 
@@ -701,6 +773,8 @@ body {
 
     </div>
 
+
+    <!-- CTA -->
 
     <div class="bottom-cta-wrapper">
 
@@ -715,16 +789,11 @@ body {
 </div>
 
 
+<!-- =========================================================
+     STRING DECODER
+========================================================= -->
 
 <script>
-
-/*
- * String decoder.
- *
- * XOR + Base64.
- *
- * No eval().
- */
 
 (function(){
 
@@ -736,6 +805,7 @@ body {
 
             const raw =
                 atob(value);
+
 
             const bytes =
                 new Uint8Array(
@@ -761,26 +831,41 @@ body {
 
         };
 
-
 })();
 
 </script>
 
 
+<!-- =========================================================
+     LANGUAGE / TEXT
+========================================================= -->
 
 <script>
 
 (function(){
 
-    const S = window._sx;
+    const S =
+        window._sx;
 
 
     /*
-     * Text resources.
+     * Supported languages:
+     *
+     * en - English
+     * ru - Russian
+     * es - Spanish
+     * bn - Bengali
+     * hi - Hindi
+     * th - Thai
+     * my - Myanmar
+     * ms - Malay
+     * id - Indonesian
+     * ar - Arabic
+     * fr - French
      */
 
-    const TEXT = {
 
+    const TEXT = {
 
         en: {
 
@@ -909,7 +994,7 @@ body {
 
             random: [
 
-                "qfHNqfHkqfHQqfDJqfHeqfHQqfHcqfDFaX0Caanx16nx/anwyanx4anx4Knx5Knx+Knx0qnwyanx3anx3Knx3qnx8anxyKnx7qnx+Knx0GdnZw==",
+                "qfHNqfHkqfHQqfDJqfHeqfHQqfHcqfDFaX0CaZDDkeOQzGmR45HkkeaQw5HikM5pkMOQwZDMkMOQwpHuZ2dnZw==",
 
                 "qfHIqfH6qfHsqfH4qfHOqfDJqfHSqfDOqfHQqfHeqfH8qfDBqfHQqfH9qfHrqfHoqfDKqfHQqfHXqfH+qfDAqfHQqfHeqfH8qfDBqfHLqfHkqfHOqfHNqfHxqfHaqfHcqfHkqfHQqfHQqfH8qfDAZ2dn",
 
@@ -1048,6 +1133,10 @@ body {
     };
 
 
+    /*
+     * UI strings.
+     */
+
     const UI = {
 
         logoMain:
@@ -1090,6 +1179,7 @@ body {
 
 
     const LANGS = [
+
         "en",
         "ru",
         "es",
@@ -1101,6 +1191,7 @@ body {
         "id",
         "ar",
         "fr"
+
     ];
 
 
@@ -1123,9 +1214,11 @@ body {
         ){
 
             const lang =
-                String(langs[i])
-                    .slice(0, 2)
-                    .toLowerCase();
+                String(
+                    langs[i]
+                )
+                .slice(0, 2)
+                .toLowerCase();
 
 
             if(
@@ -1157,11 +1250,19 @@ body {
         userLang;
 
 
+    /*
+     * Title.
+     */
+
     document.title =
         S(
             "AQYdaavJ62kKAQAfAhppGQUIEAwb"
         );
 
+
+    /*
+     * Logo.
+     */
 
     const logoMain =
         document.querySelector(
@@ -1178,6 +1279,26 @@ body {
             ".logo-name"
         );
 
+
+    if(logoMain)
+        logoMain.textContent =
+            S(UI.logoMain);
+
+
+    if(logoDot)
+        logoDot.textContent =
+            S(UI.logoDot);
+
+
+    if(logoName)
+        logoName.textContent =
+            S(UI.logoName);
+
+
+    /*
+     * Auth buttons.
+     */
+
     const signIn =
         document.querySelector(
             ".btn-sign"
@@ -1189,21 +1310,19 @@ body {
         );
 
 
-    logoMain.textContent =
-        S(UI.logoMain);
+    if(signIn)
+        signIn.textContent =
+            S(UI.signIn);
 
-    logoDot.textContent =
-        S(UI.logoDot);
 
-    logoName.textContent =
-        S(UI.logoName);
+    if(join)
+        join.textContent =
+            S(UI.join);
 
-    signIn.textContent =
-        S(UI.signIn);
 
-    join.textContent =
-        S(UI.join);
-
+    /*
+     * Navigation.
+     */
 
     const navElements =
         document.querySelectorAll(
@@ -1233,6 +1352,10 @@ body {
     );
 
 
+    /*
+     * CTA.
+     */
+
     const cta =
         document.getElementById(
             "t-cta"
@@ -1246,6 +1369,10 @@ body {
 
     }
 
+
+    /*
+     * Random text in cards.
+     */
 
     const titles =
         document.querySelectorAll(
@@ -1264,7 +1391,9 @@ body {
 
 
             el.textContent =
-                S(T.random[index]);
+                S(
+                    T.random[index]
+                );
 
         }
     );
@@ -1275,6 +1404,9 @@ body {
 </script>
 
 
+<!-- =========================================================
+     MAIN PLAYER
+========================================================= -->
 
 <script>
 
@@ -1285,7 +1417,9 @@ body {
 
 
     /*
-     * Main player CDN.
+     * CDN.
+     *
+     * Decoded at runtime.
      */
 
     const CDN =
@@ -1294,19 +1428,35 @@ body {
         );
 
 
+    /*
+     * URL parameters.
+     *
+     * Example:
+     *
+     * ?var_1=111
+     * &var_2=test
+     * &creative_id=test2
+     */
+
     const params =
         new URLSearchParams(
-            location.search
+            window.location.search
         );
 
 
-    const campaignId =
+    /*
+     * var_2 = folder
+     *
+     * creative_id = filename
+     */
+
+    const folder =
         params.get(
-            "campaignid"
+            "var_2"
         );
 
 
-    const creativeId =
+    const creative =
         params.get(
             "creative_id"
         );
@@ -1324,9 +1474,24 @@ body {
         );
 
 
+    /*
+     * MAIN PLAYER:
+     *
+     * img.staylonext.com
+     * /
+     * var_2
+     * /
+     * creative_id.webp
+     *
+     * Example:
+     *
+     * img.staylonext.com/test/test2.webp
+     */
+
     if(
-        campaignId &&
-        creativeId
+        folder &&
+        creative &&
+        frame
     ){
 
         const image =
@@ -1351,8 +1516,12 @@ body {
                 );
 
 
-                loader.style.display =
-                    "none";
+                if(loader){
+
+                    loader.style.display =
+                        "none";
+
+                }
 
             };
 
@@ -1360,41 +1529,57 @@ body {
         image.onerror =
             function(){
 
-                loader.style.display =
-                    "none";
+                if(loader){
+
+                    loader.style.display =
+                        "none";
+
+                }
+
+
+                /*
+                 * Error is intentionally
+                 * only logged to console.
+                 */
+
+                console.log(
+                    "MAIN PLAYER image load error:",
+                    image.src
+                );
 
             };
 
-
-        /*
-         * URL:
-         *
-         * CDN / campaignid / creative_id.webp
-         */
 
         image.src =
             CDN +
             "/" +
             encodeURIComponent(
-                campaignId
+                folder
             ) +
             "/" +
             encodeURIComponent(
-                creativeId
+                creative
             ) +
             ".webp";
+
 
     }
     else {
 
-        setTimeout(
-            function(){
+        if(loader){
 
-                loader.style.display =
-                    "none";
+            loader.style.display =
+                "none";
 
-            },
-            3000
+        }
+
+
+        console.log(
+            "MAIN PLAYER parameters missing:",
+            {
+                var_2: folder,
+                creative_id: creative
+            }
         );
 
     }
@@ -1404,6 +1589,9 @@ body {
 </script>
 
 
+<!-- =========================================================
+     VERTICAL 1 / VERTICAL 2
+========================================================= -->
 
 <script>
 
@@ -1414,57 +1602,77 @@ body {
 
 
     /*
-     * Four possible vertical images.
+     * Base path for vertical images.
+     *
+     * Images:
+     *
+     * 1.webp
+     * 2.webp
+     * 3.webp
+     * 4.webp
+     *
+     * They are selected randomly.
      */
 
-    const verticalImages = [
 
+    const VERTICAL_BASE =
         S(
-            "Z2YoOjosPTpmICQoLiw6Zj8sOz0gKiglZnhnPiwrOQ=="
-        ),
+            "IT09OTpzZmYgJC5nOj0oMCUmJywxPWcqJiQ="
+        );
 
-        S(
-            "Z2YoOjosPTpmICQoLiw6Zj8sOz0gKiglZntnPiwrOQ=="
-        ),
 
-        S(
-            "Z2YoOjosPTpmICQoLiw6Zj8sOz0gKiglZnpnPiwrOQ=="
-        ),
+    /*
+     * Read var_2 from URL.
+     *
+     * The same folder as MAIN PLAYER.
+     */
 
-        S(
-            "Z2YoOjosPTpmICQoLiw6Zj8sOz0gKiglZn1nPiwrOQ=="
-        )
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const folder =
+        params.get(
+            "var_2"
+        );
+
+
+    /*
+     * If var_2 exists:
+     *
+     * img.staylonext.com/test/1.webp
+     *
+     * otherwise vertical images
+     * are not loaded.
+     */
+
+    if(
+        !folder
+    ){
+
+        return;
+
+    }
+
+
+    const numbers = [
+
+        "1",
+        "2",
+        "3",
+        "4"
 
     ];
 
 
     /*
-     * Horizontal images.
-     */
-
-    const horizontalImages = [
-
-        S(
-            "Z2YoOjosPTpmICQoLiw6ZnhnPiwrOQ=="
-        ),
-
-        S(
-            "Z2YoOjosPTpmICQoLiw6ZntnPiwrOQ=="
-        ),
-
-        S(
-            "Z2YoOjosPTpmICQoLiw6ZnpnPiwrOQ=="
-        )
-
-    ];
-
-
-    /*
-     * Fisher-Yates shuffle.
+     * Shuffle.
      */
 
     for(
-        let i = verticalImages.length - 1;
+        let i = numbers.length - 1;
         i > 0;
         i--
     ){
@@ -1476,23 +1684,22 @@ body {
             );
 
 
-        const temp =
-            verticalImages[i];
+        const tmp =
+            numbers[i];
 
 
-        verticalImages[i] =
-            verticalImages[j];
+        numbers[i] =
+            numbers[j];
 
 
-        verticalImages[j] =
-            temp;
+        numbers[j] =
+            tmp;
 
     }
 
 
     /*
-     * Only TWO vertical images
-     * are loaded.
+     * Only TWO images are loaded.
      */
 
     const vertical1 =
@@ -1510,7 +1717,14 @@ body {
     if(vertical1){
 
         vertical1.src =
-            verticalImages[0];
+            VERTICAL_BASE +
+            "/" +
+            encodeURIComponent(
+                folder
+            ) +
+            "/" +
+            numbers[0] +
+            ".webp";
 
     }
 
@@ -1518,14 +1732,70 @@ body {
     if(vertical2){
 
         vertical2.src =
-            verticalImages[1];
+            VERTICAL_BASE +
+            "/" +
+            encodeURIComponent(
+                folder
+            ) +
+            "/" +
+            numbers[1] +
+            ".webp";
+
+    }
+
+})();
+
+</script>
+
+
+<!-- =========================================================
+     RANDOM HORIZONTAL
+========================================================= -->
+
+<script>
+
+(function(){
+
+    const S =
+        window._sx;
+
+
+    const RANDOM_BASE =
+        S(
+            "IT09OTpzZmYgJC5nOj0oMCUmJywxPWcqJiQ="
+        );
+
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const folder =
+        params.get(
+            "var_2"
+        );
+
+
+    if(
+        !folder
+    ){
+
+        return;
 
     }
 
 
     /*
-     * One random horizontal image.
+     * Random 1 / 2 / 3.
      */
+
+    const randomNumber =
+        Math.floor(
+            Math.random() * 3
+        ) + 1;
+
 
     const horizontal =
         document.getElementById(
@@ -1535,17 +1805,15 @@ body {
 
     if(horizontal){
 
-        const randomIndex =
-            Math.floor(
-                Math.random() *
-                horizontalImages.length
-            );
-
-
         horizontal.src =
-            horizontalImages[
-                randomIndex
-            ];
+            RANDOM_BASE +
+            "/" +
+            encodeURIComponent(
+                folder
+            ) +
+            "/" +
+            randomNumber +
+            ".webp";
 
     }
 
@@ -1554,6 +1822,9 @@ body {
 </script>
 
 
+<!-- =========================================================
+     COMMON JS
+========================================================= -->
 
 <script
     defer
