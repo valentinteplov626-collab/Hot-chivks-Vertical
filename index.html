@@ -1615,10 +1615,7 @@ body {
      */
 
 
-    const VERTICAL_BASE =
-        S(
-            "IT09OTpzZmYgJC5nOj0oMCUmJywxPWcqJiQ="
-        );
+    const VERTICAL_BASE = "./assets/images/vertical";
 
 
     /*
@@ -1627,34 +1624,7 @@ body {
      * The same folder as MAIN PLAYER.
      */
 
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
 
-
-    const folder =
-        params.get(
-            "var_2"
-        );
-
-
-    /*
-     * If var_2 exists:
-     *
-     * img.staylonext.com/test/1.webp
-     *
-     * otherwise vertical images
-     * are not loaded.
-     */
-
-    if(
-        !folder
-    ){
-
-        return;
-
-    }
 
 
     const numbers = [
@@ -1719,10 +1689,6 @@ body {
         vertical1.src =
             VERTICAL_BASE +
             "/" +
-            encodeURIComponent(
-                folder
-            ) +
-            "/" +
             numbers[0] +
             ".webp";
 
@@ -1733,10 +1699,6 @@ body {
 
         vertical2.src =
             VERTICAL_BASE +
-            "/" +
-            encodeURIComponent(
-                folder
-            ) +
             "/" +
             numbers[1] +
             ".webp";
@@ -1761,30 +1723,10 @@ body {
 
 
     const RANDOM_BASE =
-        S(
-            "IT09OTpzZmYgJC5nOj0oMCUmJywxPWcqJiQ="
-        );
+        "./assets/images";
 
 
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
 
-
-    const folder =
-        params.get(
-            "var_2"
-        );
-
-
-    if(
-        !folder
-    ){
-
-        return;
-
-    }
 
 
     /*
@@ -1793,7 +1735,7 @@ body {
 
     const randomNumber =
         Math.floor(
-            Math.random() * 3
+            Math.random() * 4
         ) + 1;
 
 
@@ -1807,10 +1749,6 @@ body {
 
         horizontal.src =
             RANDOM_BASE +
-            "/" +
-            encodeURIComponent(
-                folder
-            ) +
             "/" +
             randomNumber +
             ".webp";
