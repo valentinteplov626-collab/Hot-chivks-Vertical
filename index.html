@@ -278,35 +278,171 @@ body {
 
     left: 50%;
 
-    width: 40px;
-
-    height: 40px;
-
-    border:
-        3px solid
-        rgba(0, 229, 255, 0.2);
-
-    border-top-color: #00e5ff;
-
-    border-radius: 50%;
+    width: 72%;
 
     transform:
         translate(-50%, -50%);
 
-    animation:
-        spin 1s linear infinite;
-
-    z-index: 10;
+    z-index: 30;
 }
 
-@keyframes spin {
+.xh-progress-wrap {
 
-    to {
+    width: 100%;
 
-        transform:
-            translate(-50%, -50%)
-            rotate(360deg);
-    }
+    text-align: center;
+}
+
+.xh-progress-bar {
+
+    width: 100%;
+
+    height: 8px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.22);
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 12px
+        rgba(0, 0, 0, 0.35);
+}
+
+.xh-progress-fill {
+
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #fff;
+
+    transition: width 0.04s linear;
+}
+
+.xh-progress-text {
+
+    margin-top: 9px;
+
+    color: #fff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    text-shadow:
+        0 1px 4px
+        rgba(0, 0, 0, 0.7);
+}
+
+.xh-frame.preloading {
+
+    filter: blur(6px);
+
+    transform: scale(1.02);
+
+    transition:
+        filter 0.25s ease,
+        transform 0.25s ease,
+        opacity 0.5s ease;
+}
+
+.xh-frame.clear {
+
+    filter: blur(0);
+
+    transform: scale(1);
+}
+
+.fake-video-controls {
+
+    position: absolute;
+
+    left: 5%;
+
+    right: 5%;
+
+    bottom: 12px;
+
+    z-index: 21;
+
+    pointer-events: none;
+}
+
+.fake-video-track {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 4px;
+
+    border-radius: 5px;
+
+    background: rgba(255, 255, 255, 0.35);
+
+    box-shadow:
+        0 1px 5px
+        rgba(0, 0, 0, 0.45);
+}
+
+.fake-video-progress {
+
+    width: 45%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #fff;
+}
+
+.fake-video-marker {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 45%;
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    transform:
+        translate(-50%, -50%);
+
+    box-shadow:
+        0 1px 5px
+        rgba(0, 0, 0, 0.5);
+}
+
+.fake-video-time {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 7px;
+
+    color: #fff;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-shadow:
+        0 1px 4px
+        rgba(0, 0, 0, 0.8);
 }
 
 
@@ -344,12 +480,41 @@ body {
 
     pointer-events: none;
 
-    animation:
-        playPulse 2s ease-in-out infinite;
+    opacity: 0;
+
+    visibility: hidden;
+
+    animation: none;
 
     box-shadow:
         0 4px 20px
         rgba(0, 0, 0, 0.35);
+}
+
+.player-play.ready {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    animation:
+        playPulse 2s ease-in-out infinite;
+}
+
+.fake-video-controls {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: opacity 0.25s ease;
+}
+
+.fake-video-controls.ready {
+
+    opacity: 1;
+
+    visibility: visible;
 }
 
 .player-play::after {
@@ -698,11 +863,26 @@ body {
         <div
             class="xh-loader"
             id="loader">
+            <div class="xh-progress-wrap">
+                <div class="xh-progress-bar">
+                    <div class="xh-progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="xh-progress-text" id="progress-text">0%</div>
+            </div>
         </div>
 
         <div
             class="player-play"
+            id="player-play"
             aria-hidden="true">
+        </div>
+
+        <div class="fake-video-controls" aria-hidden="true">
+            <div class="fake-video-track">
+                <div class="fake-video-progress"></div>
+                <div class="fake-video-marker"></div>
+            </div>
+            <div class="fake-video-time">0:45</div>
         </div>
 
     </div>
@@ -1494,6 +1674,10 @@ body {
         frame
     ){
 
+        frame.classList.add(
+            "preloading"
+        );
+
         const image =
             new Image();
 
@@ -1516,25 +1700,11 @@ body {
                 );
 
 
-                if(loader){
-
-                    loader.style.display =
-                        "none";
-
-                }
-
             };
 
 
         image.onerror =
             function(){
-
-                if(loader){
-
-                    loader.style.display =
-                        "none";
-
-                }
 
 
                 /*
@@ -1549,6 +1719,111 @@ body {
 
             };
 
+
+        /*
+         * Fake 2-second loading screen.
+         */
+        if(loader){
+
+            const progressFill =
+                document.getElementById(
+                    "progress-fill"
+                );
+
+            const progressText =
+                document.getElementById(
+                    "progress-text"
+                );
+
+            const startedAt =
+                performance.now();
+
+            function updateProgress(now){
+
+                const percent =
+                    Math.min(
+                        100,
+                        ((now - startedAt) / 2000) * 100
+                    );
+
+                if(progressFill){
+
+                    progressFill.style.width =
+                        percent + "%";
+                }
+
+                if(progressText){
+
+                    progressText.textContent =
+                        Math.floor(percent) + "%";
+                }
+
+                if(percent < 100){
+
+                    requestAnimationFrame(
+                        updateProgress
+                    );
+                }
+            }
+
+            requestAnimationFrame(
+                updateProgress
+            );
+
+            setTimeout(
+                function(){
+
+                    if(progressFill){
+
+                        progressFill.style.width =
+                            "100%";
+                    }
+
+                    if(progressText){
+
+                        progressText.textContent =
+                            "100%";
+                    }
+
+                    loader.style.display =
+                        "none";
+
+                    const playButton =
+                        document.getElementById(
+                            "player-play"
+                        );
+
+                    const videoControls =
+                        document.querySelector(
+                            ".fake-video-controls"
+                        );
+
+                    if(playButton){
+
+                        playButton.classList.add(
+                            "ready"
+                        );
+                    }
+
+                    if(videoControls){
+
+                        videoControls.classList.add(
+                            "ready"
+                        );
+                    }
+
+                    frame.classList.remove(
+                        "preloading"
+                    );
+
+                    frame.classList.add(
+                        "clear"
+                    );
+
+                },
+                2000
+            );
+        }
 
         image.src =
             CDN +
